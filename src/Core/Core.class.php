@@ -10,7 +10,7 @@ class Core extends ApiStandard
 
     function __construct()
     {
-        $baseUrl          =     'https://api.bscscan.com/api';
+        $baseUrl          =     'https://api.bscscan.com/';
         $sslStatus        =     true;
         parent::__construct($baseUrl, $sslStatus);
     }

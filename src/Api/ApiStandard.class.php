@@ -21,7 +21,6 @@
             try
             {
                 $url    =   "{$this->baseUrl}{$request->getUrn()}";
-
                 $cURL   =   curl_init($url);
                             curl_setopt($cURL, CURLOPT_RETURNTRANSFER, true);
                 switch($requestMethod)

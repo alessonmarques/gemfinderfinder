@@ -17,7 +17,6 @@ class CoreObject extends Core
         if(isset($id) && !empty($id))
         {
             $this->setId($id);
-            $this->get();
         }
     }
 
@@ -26,31 +25,25 @@ class CoreObject extends Core
         $this->id = $id;
     }
 
-    function get()
-    {
-        $parameters = [];
-        
-        if(isset($this->token) && !empty($this->token))
-        {
-            $parameters['access_token'] = $this->token;
-        }
-
-        $request = new ApiUrn($this::OBJECT_SERVICE, $this->id, '', $parameters);
-
-        print_r($request->getUrn());
-
-        $classInfo = $this->communicate('', 'GET', $request);
-        $this->set($classInfo);
-
-        return $classInfo;
-    }
-
     private function set($classInfo)
     {
         foreach($classInfo as $attribute => $value)
         {
             $this->$attribute = $value;
         }
+    }
+
+    function getCustomParameters(&$parameters, $custom_parameters) 
+    {
+        foreach ($custom_parameters as $name => $value) 
+        {
+            if(isset($value) && !is_null($value))
+            {
+                $parameters[$name] = $value;
+            }
+        }
+
+        $parameters['apikey'] = $this->token;
     }
 
 }

@@ -7,13 +7,14 @@ use stdClass;
 
 class Account extends CoreObject
 {
+    /**
+     * Define the BSC Module parameter.
+     */
+    const OBJECT_MODULE = 'account';
+
     protected $id;
-   
-    // action
-    // address
-    // startblock
-    // endblock
-    // sort
+    
+    
     // apikey
 
     function __construct($id = 0)
@@ -23,15 +24,29 @@ class Account extends CoreObject
         if(isset($id) && !empty($id))
         {
             $this->setId($id);
-            $this->get();
         }
     }
     
-    function getComments($parameters = [])
+    function getTXList($custom_parameters = [   
+                                                'startblock' => NULL, 
+                                                'endblock' => NULL, 
+                                                'sort' => 'desc'
+                                            ])
     {
-        $request = new ApiUrn($this::OBJECT_SERVICE, $this->id, 'comments', $parameters);
-        $albumComments = $this->communicate('', 'GET', $request);
+        $action = 'txlist';
+        $parameters = [ 
+            'address' => $this->id
+        ];
+        
+        $this->getCustomParameters($parameters, $custom_parameters);    
 
-        return $albumComments;
+        $request = new ApiUrn(
+                                $this::OBJECT_SERVICE, 
+                                $this::OBJECT_MODULE, 
+                                $action, 
+                                $parameters);
+
+        $txList = $this->communicate('', 'GET', $request);
+        return $txList;
     }
 }
