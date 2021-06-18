@@ -24,7 +24,7 @@ class Account extends CoreObject
         }
     }
     
-    function getTXList($custom_parameters = [   
+    function getNormalTXList($custom_parameters = [   
                                                 'startblock' => NULL, 
                                                 'endblock' => NULL, 
                                                 'sort' => 'desc'
@@ -33,6 +33,48 @@ class Account extends CoreObject
         $action = 'txlist';
         $parameters = [ 
             'address' => $this->id
+        ];
+        
+        $this->getCustomParameters($parameters, $custom_parameters);    
+
+        $request = new ApiUrn(
+                                $this::OBJECT_SERVICE, 
+                                $this::OBJECT_MODULE, 
+                                $action, 
+                                $parameters);
+
+        $txList = $this->communicate('', 'GET', $request);
+        return $txList;
+    }
+
+    function getInternalTXList($custom_parameters = [   
+                                                'startblock' => NULL, 
+                                                'endblock' => NULL, 
+                                                'sort' => 'desc'
+                                            ])
+    {
+        $action = 'txlistinternal';
+        $parameters = [ 
+            'address' => $this->id
+        ];
+        
+        $this->getCustomParameters($parameters, $custom_parameters);    
+
+        $request = new ApiUrn(
+                                $this::OBJECT_SERVICE, 
+                                $this::OBJECT_MODULE, 
+                                $action, 
+                                $parameters);
+
+        $txList = $this->communicate('', 'GET', $request);
+        return $txList;
+    }
+
+    function getInternalTX($txHash, $custom_parameters = [])
+    {
+        $action = 'txlistinternal';
+        $parameters = [ 
+            'txhash' => $txHash
         ];
         
         $this->getCustomParameters($parameters, $custom_parameters);    

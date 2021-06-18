@@ -6,6 +6,9 @@
     $account    = new Account($wallet);
 
     echo "<pre>";
-    print_r($account->getTXList());
+    //print_r($account->getNormalTXList()->result[81]);
+    print_r($account->getInternalTX('0x9e88e3914ddeabf3d8f76e5b27a38dd4872ec08e7f0043a26ffdc3944d74a57c'));
+    //print_r($account->getInternalTXList());
+
     echo "</pre>";
     die();

@@ -3,14 +3,15 @@
 namespace Core;
 
 use Api\ApiUrn;
-use stdClass;
-
 class Token extends CoreObject
 {
-    const OBJECT_SERVICE = 'editorial';
+    /**
+     * Define the BSC Module parameter.
+     */
+    const OBJECT_MODULE = 'token';
 
     protected $id;
-
+    
     function __construct($id = 0)
     {
         parent::__construct();
@@ -18,35 +19,31 @@ class Token extends CoreObject
         if(isset($id) && !empty($id))
         {
             $this->setId($id);
-            $this->get();
         }
     }
-
-    function getSelection($parameters = [])
+    
+    /*
+    function getTXList($custom_parameters = [   
+                                            'startblock' => NULL, 
+                                            'endblock' => NULL, 
+                                            'sort' => 'desc'
+                                        ])
     {
-        $request = new ApiUrn($this::OBJECT_SERVICE, 'id', 'selection', $parameters);
-        $editorialSelection = $this->communicate('', 'GET', $request);
+        $action = 'txlist';
+        $parameters = [ 
+            'address' => $this->id
+        ];
+        
+        $this->getCustomParameters($parameters, $custom_parameters);    
 
-        return $editorialSelection;
+        $request = new ApiUrn(
+                                $this::OBJECT_SERVICE, 
+                                $this::OBJECT_MODULE, 
+                                $action, 
+                                $parameters);
+
+        $txList = $this->communicate('', 'GET', $request);
+        return $txList;
     }
-
-    function getCharts($parameters = [])
-    {
-        $request = new ApiUrn($this::OBJECT_SERVICE, 'id', 'charts', $parameters);
-        $editorialCharts = $this->communicate('', 'GET', $request);
-
-        return $editorialCharts;
-    }
-
-    function getReleases($parameters = [])
-    {
-        $request = new ApiUrn($this::OBJECT_SERVICE, 'id', 'releases', $parameters);
-        $editorialReleases = $this->communicate('', 'GET', $request);
-
-        return $editorialReleases;
-    }
-
-
-
-
+    */
 }
