@@ -43,7 +43,7 @@ class CoreObject extends Core
             }
         }
 
-        $parameters['apikey'] = $this->token;
+        $parameters['apikey'] = $_ENV['APP_BSC_APIKEY'];
     }
 
 }

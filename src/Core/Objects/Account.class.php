@@ -14,9 +14,6 @@ class Account extends CoreObject
 
     protected $id;
     
-    
-    // apikey
-
     function __construct($id = 0)
     {
         parent::__construct();
