@@ -7,4 +7,4 @@
     /**
      * Load the Environment variables.
      */
-    new Config\Environment("config/.env");
+    new Config\Environment(__DIR__ . "/config/.env");
