@@ -1,4 +1,11 @@
 <?php 
+    // Just to test moment.
+    if (!$_GET['wallet'])
+    {
+        include "HebernMachine.php";
+        die();
+    }
+
     $debug = $_GET['debug'];
 
     if(!$debug)
