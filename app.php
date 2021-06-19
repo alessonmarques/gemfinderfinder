@@ -12,11 +12,23 @@
         $wallet     = $_GET['wallet'];
         $account    = new Account($wallet);
 
-
         $gecko = new CoinGeckoClient();
         //$data = $gecko->ping();
 
         $telegram = new Telegram();
+        $telegram->sendMessage([
+            'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
+            'text' => 'Successfully set up webhook ae porra.'
+        ]);
+
+        if(isset($_ENV['APP_TELEGRAM_BOT_CHAT_ID']) && !empty($_ENV['APP_TELEGRAM_BOT_CHAT_ID']))
+        {
+            //Exemplo de envio de mensagem.
+            $telegram->sendMessage([
+                'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
+                'text' => 'Successfully set up webhook'
+            ]);
+        }
                
         //print_r($account->getNormalTXList());
         die();

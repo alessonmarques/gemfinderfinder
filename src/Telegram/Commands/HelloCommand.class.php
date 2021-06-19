@@ -10,8 +10,15 @@ class HelloCommand extends Command {
 
     public function handle()
     {
+        $update = $this->getUpdate();
+    	$userid = $update->getMessage()->from->id;
+
         $this->replyWithMessage([
-            'text' => 'Hello World!'
+            'text' => "Hello World {$userid}"
+        ]);
+
+        $this->replyWithMessage([
+            'text' => json_encode($update)
         ]);
     }
 
