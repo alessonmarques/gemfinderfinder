@@ -3,8 +3,7 @@
     /**
     * Defines the log to get access data.
     */
-    
-    $SERVER_REQUEST_DATA = json_encode($_SERVER);
+    $SERVER_REQUEST_DATA = json_encode(['Server' => $_SERVER, 'Post' => $_POST, 'Get' => $_GET, 'Request' => $_REQUEST]);
     error_log($SERVER_REQUEST_DATA);
 
     /**
@@ -16,4 +15,3 @@
     
     $telegram = new Telegram();
     $telegram->commandsHandler(true);
-    $telegram->regCommands();

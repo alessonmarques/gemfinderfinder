@@ -7,23 +7,19 @@ namespace Telegram;
 
 use Telegram\Commands\HelloCommand;
 use Telegram\Bot\Api;
-
 class Telegram extends Api
 {
+    private $commands = [
+        HelloCommand::class,
+    ];
+
     /**
      * Defines the constructor and starts the parent with the bot token.
      */
     function __construct()
     {
         parent::__construct($_ENV['APP_TELEGRAM_BOT_TOKEN']);
+        $this->addCommands($this->commands);
     }
-
-    function regCommands()
-    {
-        $this->addCommands([
-            HelloCommand::class,
-        ]);
-    }
-
-
+    
 }
