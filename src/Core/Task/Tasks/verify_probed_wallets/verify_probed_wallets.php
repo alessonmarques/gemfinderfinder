@@ -73,174 +73,37 @@ foreach ($probed_wallets as $probed_wallet) {
         $internalTXList = $account->getInternalTXList()->result;
 
         /**
-         * Verify if the quantity of the Normal TXs on database are different 
-         * from the obtained at BSC.
+         * Call the Sub-Task to check and insert the Normal TX;
          */
-        if($count_normalTXList != count($normalTXList)) {
-            
-            /**
-             * Get the last TX registrated to that wallet in the BD.
-             */
-            $sql = "SELECT * FROM tx_normal WHERE _from = '{$probed_wallet->id}' ORDER BY transaction_hash DESC LIMIT 1";
-            $last_normalTX = $connection->select($sql)[0];
-
-            /**
-             * Loop in the TX from BSC to persist the data in DB.
-             */
-            foreach ($normalTXList as $normalTX) {
-
-                /**
-                 * Will stop the loop if the BSC Transaction Hash == The last Transaction Hash
-                 * in the database.
-                 */
-                if($normalTX->hash == $last_normalTX->transaction_hash) {
-                    break;
-                }
-
-                $to_insert_normalTX[] = $normalTX;
-            }
-
-            /**
-             * If have normalTX to Insert.
-             */
-            if ($to_insert_normalTX) {
-                /**
-                 * Define the values to insert variable.
-                 */
-                $values = [];
-
-                /**
-                 * Invert the array to insert.
-                 * Cuz when we get from the BSC the TXList come ordered in DESC.
-                 */
-                $to_insert_normalTX = array_reverse($to_insert_normalTX);
-
-                foreach ($to_insert_normalTX as $normalTX) {
-
-                    /**
-                     * Retrive the Date from TimeStamp.
-                     */
-                    $transaction_hash_date = date('Y-m-d H:i:s', $normalTX->timeStamp);
-                    
-                    /**
-                     * Set the hash into the values to be inserted.
-                     */
-                    $values[] = "('{$normalTX->hash}', {$normalTX->timeStamp}, {$probed_wallet->id}, '{$normalTX->to}', 0, 0, now())";
-                    
-                    /**
-                     * Save the message to send as report.
-                     */
-                    $report->messages["{$normalTX->timeStamp}.out"] = "The address {$normalTX->from} make a transaction to {$normalTX->to} at {$transaction_hash_date}. {\n}You can check it in the TX: {$normalTX->hash}.";
-
-                }
-                /**
-                 * Implode the values to insert all rows in same exectuion.
-                 */
-                $values = implode(',', $values);
-
-                /**
-                 * Insert the transactions hash to DB.
-                 */
-                $sql = "INSERT INTO tx_normal (transaction_hash, timestamp, _from, _to, price, quantity, date) VALUES {$values}";
-                $connection->execute($sql);
-            }
-        }
+        include "subtask/normal_tx.php";
 
         /**
-         * Verify if the quantity of the Internal TXs on database are different 
-         * from the obtained at BSC.
+         * Call the Sub-Task to check and insert the Internal TX;
          */
-        if($count_internalTXList != count($internalTXList)) {
-            
-            /**
-             * Get the last TX registrated to that wallet in the BD.
-             */
-            $sql = "SELECT * FROM tx_internal WHERE _to = '{$probed_wallet->id}' ORDER BY transaction_hash DESC LIMIT 1";
-            $last_internalTX = $connection->select($sql)[0];
+        include "subtask/internal_tx.php";
 
-            /**
-             * Loop in the TX from BSC to persist the data in DB.
-             */
-            foreach ($internalTXList as $internalTX) {
-
-                /**
-                 * Will stop the loop if the BSC Transaction Hash == The last Transaction Hash
-                 * in the database.
-                 */
-                if($internalTX->hash == $last_internalTX->transaction_hash) {
-                    break;
-                }
-
-                $to_insert_internalTX[] = $internalTX;
-            }
-
-            /**
-             * If have internalTX to Insert.
-             */
-            if ($to_insert_internalTX) {
-                /**
-                 * Define the values to insert variable.
-                 */
-                $values = [];
-
-                /**
-                 * Invert the array to insert.
-                 * Cuz when we get from the BSC the TXList come ordered in DESC.
-                 */
-                $to_insert_internalTX = array_reverse($to_insert_internalTX);
-
-                foreach ($to_insert_internalTX as $internalTX) {
-
-                    /**
-                     * Retrive the Date from TimeStamp.
-                     */
-                    $transaction_hash_date = date('Y-m-d H:i:s', $internalTX->timeStamp);
-                    
-                    /**
-                     * Set the hash into the values to be inserted.
-                     */
-                    $values[] = "('{$internalTX->hash}', {$internalTX->timeStamp}, '{$internalTX->from}', {$probed_wallet->id}, 0, 0, now())";
-                    
-                    /**
-                     * Save the message to send as report.
-                     */
-                    $report->messages["{$internalTX->timeStamp}.in"] = "The address {$internalTX->from} received a transaction to {$internalTX->to} at {$transaction_hash_date}. {\n}You can check it in the TX: {$internalTX->hash}.";
-
-                }
-                /**
-                 * Implode the values to insert all rows in same exectuion.
-                 */
-                $values = implode(',', $values);
-
-                /**
-                 * Insert the transactions hash to DB.
-                 */
-                $sql = "INSERT INTO tx_internal (transaction_hash, timestamp, _from, _to, price, quantity, date) VALUES {$values}";
-                $connection->execute($sql);
-
-                
-
-            }
-        }
     }
-
-    /**
-     * Sort the message array by key to mix the in and out ordened by TimeStamp.
-     */
-    ksort($report->messages);
-
-    /**
-     * Join the whole array into a String to send as report to telegram chat_id.
-     */
-    $report_message = implode("\n", $report->messages);
     
-    /**
-     * Send the report to telegram.
-     */
-    $telegram->sendMessage([
-        'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
-        'text' => $report_message
-    ]);
+    if($report->messages)
+    {
+        /**
+         * Sort the message array by key to mix the in and out ordened by TimeStamp.
+         */
+        ksort($report->messages);
+
+        /**
+         * Join the whole array into a String to send as report to telegram chat_id.
+         */
+        $report_message = implode("\n", $report->messages);
+        
+        /**
+         * Send the report to telegram.
+         */
+        $telegram->sendMessage([
+            'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
+            'text' => $report_message
+        ]);
+    }
     
 }
 
