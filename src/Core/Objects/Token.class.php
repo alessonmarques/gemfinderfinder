@@ -12,12 +12,12 @@ class Token extends CoreObject
 
     protected $id;
     
-    function __construct($id = 0)
-    {
+    function __construct($id = 0) {
+    
         parent::__construct();
 
-        if(isset($id) && !empty($id))
-        {
+        if(isset($id) && !empty($id)) {
+        
             $this->setId($id);
         }
     }
@@ -27,8 +27,8 @@ class Token extends CoreObject
                                             'startblock' => NULL, 
                                             'endblock' => NULL, 
                                             'sort' => 'desc'
-                                        ])
-    {
+                                        ]) {
+    
         $action = 'txlist';
         $parameters = [ 
             'address' => $this->id

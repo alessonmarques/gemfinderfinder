@@ -8,8 +8,8 @@ class Core extends ApiStandard
 {      
     protected $token;
 
-    function __construct()
-    {
+    function __construct() {
+    
         $baseUrl          =     'https://api.bscscan.com/';
         $sslStatus        =     true;
         parent::__construct($baseUrl, $sslStatus);

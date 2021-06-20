@@ -16,8 +16,8 @@ class Telegram extends Api
     /**
      * Defines the constructor and starts the parent with the bot token.
      */
-    function __construct()
-    {
+    function __construct() {
+    
         parent::__construct($_ENV['APP_TELEGRAM_BOT_TOKEN']);
         $this->addCommands($this->commands);
     }

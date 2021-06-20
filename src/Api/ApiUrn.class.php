@@ -11,8 +11,8 @@
 
         private $path;
 
-        function __construct($service = '', $module = '', $action = '', $parameters = [])
-        {
+        function __construct($service = '', $module = '', $action = '', $parameters = []) {
+        
             $this->service      =   $service;
             $this->action       =   $action;
             $this->module       =   $module;
@@ -21,44 +21,44 @@
             $this->constructPath();
         }
 
-        public function setService($service)
-        {
+        public function setService($service) {
+        
             $this->service      =   $service;
             $this->constructPath();
         }
 
-        public function setAction($module)
-        {
+        public function setAction($module) {
+        
             $this->module      =   $module;
             $this->constructPath();
         }
 
-        public function setModule($action)
-        {
+        public function setModule($action) {
+        
             $this->action      =   $action;
             $this->constructPath();
         }
         
-        public function setParameters($parameters)
-        {
+        public function setParameters($parameters) {
+        
             $this->parameters   =   $this->constructParameterQueryString($parameters);
             $this->constructPath();
         }
 
-        public function getUrn()
-        {
+        public function getUrn() {
+        
             return $this->path;
         }
 
-        private function constructParameterQueryString($parameters)
-        {
+        private function constructParameterQueryString($parameters) {
+        
             $queryString = [
                 "module={$this->module}",
                 "action={$this->action}"
             ];
 
-            foreach($parameters as $parameterName => $parameterValue)
-            {
+            foreach($parameters as $parameterName => $parameterValue) {
+            
                 $queryString[] = "{$parameterName}={$parameterValue}";
             }
             $queryString = implode('&', $queryString);
@@ -67,8 +67,8 @@
             return $queryString;
         }
 
-        private function constructPath()
-        {
+        private function constructPath() {
+        
             $this->path         =   implode('/', [$this->service, $this->parameters]);
         }
 

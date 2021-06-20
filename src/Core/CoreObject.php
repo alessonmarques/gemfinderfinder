@@ -10,25 +10,25 @@ class CoreObject extends Core
 
     public $tokenDestroyTime;
 
-    function __construct($id = 0)
-    {
+    function __construct($id = 0) {
+    
         parent::__construct();
 
-        if(isset($id) && !empty($id))
-        {
+        if(isset($id) && !empty($id)) {
+        
             $this->setId($id);
         }
     }
 
-    function setId($id)
-    {
+    function setId($id) {
+    
         $this->id = $id;
     }
 
-    private function set($classInfo)
-    {
-        foreach($classInfo as $attribute => $value)
-        {
+    private function set($classInfo) {
+    
+        foreach($classInfo as $attribute => $value) {
+        
             $this->$attribute = $value;
         }
     }
@@ -37,8 +37,8 @@ class CoreObject extends Core
     {
         foreach ($custom_parameters as $name => $value) 
         {
-            if(isset($value) && !is_null($value))
-            {
+            if(isset($value) && !is_null($value)) {
+            
                 $parameters[$name] = $value;
             }
         }

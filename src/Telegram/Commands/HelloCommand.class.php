@@ -8,8 +8,8 @@ class HelloCommand extends Command {
 
     protected $name = 'hello';
 
-    public function handle()
-    {
+    public function handle() {
+    
         $update = $this->getUpdate();
     	$userid = $update->getMessage()->from->id;
 

@@ -30,7 +30,7 @@ if($count_internalTXList != count($internalTXList)) {
     /**
      * If have internalTX to Insert.
      */
-    if ($to_insert_internalTX) {
+    if($to_insert_internalTX) {
         /**
          * Define the values to insert variable.
          */

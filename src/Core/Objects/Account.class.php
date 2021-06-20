@@ -14,12 +14,12 @@ class Account extends CoreObject
 
     protected $id;
     
-    function __construct($id = 0)
-    {
+    function __construct($id = 0) {
+    
         parent::__construct();
 
-        if(isset($id) && !empty($id))
-        {
+        if(isset($id) && !empty($id)) {
+        
             $this->setId($id);
         }
     }
@@ -28,8 +28,8 @@ class Account extends CoreObject
                                                 'startblock' => NULL, 
                                                 'endblock' => NULL, 
                                                 'sort' => 'desc'
-                                            ])
-    {
+                                            ]) {
+    
         $action = 'txlist';
         $parameters = [ 
             'address' => $this->id
@@ -51,8 +51,8 @@ class Account extends CoreObject
                                                 'startblock' => NULL, 
                                                 'endblock' => NULL, 
                                                 'sort' => 'desc'
-                                            ])
-    {
+                                            ]) {
+    
         $action = 'txlistinternal';
         $parameters = [ 
             'address' => $this->id
@@ -70,8 +70,8 @@ class Account extends CoreObject
         return $txList;
     }
 
-    function getInternalTX($txHash, $custom_parameters = [])
-    {
+    function getInternalTX($txHash, $custom_parameters = []) {
+    
         $action = 'txlistinternal';
         $parameters = [ 
             'txhash' => $txHash

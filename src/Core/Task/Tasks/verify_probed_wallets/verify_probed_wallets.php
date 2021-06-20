@@ -84,8 +84,8 @@ foreach ($probed_wallets as $probed_wallet) {
 
     }
     
-    if($report->messages)
-    {
+    if($report->messages) {
+    
         /**
          * Sort the message array by key to mix the in and out ordened by TimeStamp.
          */

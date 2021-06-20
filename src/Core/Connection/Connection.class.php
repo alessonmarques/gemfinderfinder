@@ -8,9 +8,9 @@ class Connection
 {
     protected $pdo;
     
-    public function __construct($usr = '', $pass = '', $host = '', $port = '', $dbname = '', $drive = '')
-    {
-        if (func_num_args()) {
+    public function __construct($usr = '', $pass = '', $host = '', $port = '', $dbname = '', $drive = '') {
+    
+        if(func_num_args()) {
             $this->pdo = $this->pdo(    $usr, 
                                         $pass, 
                                         $host, 
@@ -28,8 +28,8 @@ class Connection
                                     $_ENV['APP_PDO_DRIVE']);
     }
 
-    public function execute($sql)
-    {	
+    public function execute($sql) {
+    	
         $rs = null;
         $stmt = null;
         try{
@@ -43,8 +43,8 @@ class Connection
         }
     }
     
-    public function select($sql)
-    {	
+    public function select($sql) {
+    	
         $rs = null;
         $stmt = null;
         try{
@@ -61,8 +61,8 @@ class Connection
         return $rs;
     }
 
-    protected function pdo($username, $password, $host = 'localhost', $port = '3306', $dbname = 'app', $drive = 'mysql')
-    {
+    protected function pdo($username, $password, $host = 'localhost', $port = '3306', $dbname = 'app', $drive = 'mysql') {
+    
         try{
             $pdo = new PDO("{$drive}:host={$host}:{$port};dbname={$dbname}", 
                             $username, 

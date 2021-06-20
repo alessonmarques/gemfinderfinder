@@ -30,7 +30,7 @@ if($count_normalTXList != count($normalTXList)) {
     /**
      * If have normalTX to Insert.
      */
-    if ($to_insert_normalTX) {
+    if($to_insert_normalTX) {
         /**
          * Define the values to insert variable.
          */

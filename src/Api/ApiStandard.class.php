@@ -10,14 +10,14 @@
         private $baseUrl;
         private $sslStatus;
 
-        function __construct($baseUrl, $sslStatus)
-        {
+        function __construct($baseUrl, $sslStatus) {
+        
             $this->baseUrl          =   $baseUrl;
             $this->sslStatus        =   $sslStatus;
         }
 
-        function communicate($data, $requestMethod, $request, $header = [])
-        {
+        function communicate($data, $requestMethod, $request, $header = []) {
+        
             try
             {
                 $url    =   "{$this->baseUrl}{$request->getUrn()}";
@@ -53,8 +53,8 @@
                 $response = curl_exec($cURL);
                 curl_close($cURL);
             }
-            catch(Exception $e)
-            {
+            catch(Exception $e) {
+            
                 $response = $e->getMessage();
             }
 

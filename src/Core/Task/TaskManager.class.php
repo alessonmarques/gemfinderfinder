@@ -11,9 +11,13 @@ class TaskManager
      */
     function __construct() { }
 
-    function __call($task, $arguments)
-    {
-        
+    function __call($task, $arguments) {
+    
+        /**
+         * Define the parameters variable.
+         */
+        $parameters = [];
+
         /**
          * Assume the real task name.
          */
@@ -22,8 +26,8 @@ class TaskManager
         /**
          * Turns the arguments into array by json_decoding.
          */
-        if (isset($arguments) && !empty($arguments))
-        {
+        if(isset($arguments[0]) && !empty($arguments[0])) {
+        
 
             /**
              * Decodes the received json to an array.
@@ -33,16 +37,26 @@ class TaskManager
             /**
              * Turns the arguments into numbered parameters.
              */
-            foreach ($arguments as $argument) {
-                $parameters[] = $argument;
+            if(json_last_error() === JSON_ERROR_NONE && is_array($arguments)) {
+            
+                foreach ($arguments as $argument) {
+                    $parameters[] = $argument;
+                }
             }
 
         }
 
         /**
+         * If the parameters got empty set 1 to pass in the function call.
+         */
+        if(!$parameters) {
+            $parameters[0] = 0;
+        }
+
+        /**
          * Verify if the task actually exists.
          */
-        if ( !method_exists($this, $task) ) {
+        if(!method_exists($this, $task)) {
 
             throw new Exception("This method does not exist or aren't registrated to the TaskManager.");
 
@@ -68,6 +82,16 @@ class TaskManager
      * Defines the send_custom_message_to_group Function.
      */
     function task_send_custom_message_to_group($message) {
+        
+        /**
+         * Verify if the parameters are given as expected.
+         */
+        if(!isset($message) || empty($message)) {
+        
+
+            throw new Exception("The '\$message' parameter aren't defined.");
+
+        }
 
         require 'Tasks/send_custom_message_to_group/send_custom_message_to_group.php';
 

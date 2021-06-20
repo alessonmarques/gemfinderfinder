@@ -16,8 +16,7 @@ $options    = isset($_GET['options']) && !empty($_GET['options']) ? $_GET['optio
 /**
  * Check if the method doesn't exists and show the HeberMachine home page.
  */
-if (!method_exists(TaskManager::class, "task_{$task}"))
-{
+if(!method_exists(TaskManager::class, "task_{$task}")) {
     require __DIR__ . "/HebernMachine.php";
     die();
 }
