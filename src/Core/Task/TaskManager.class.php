@@ -2,7 +2,7 @@
 
 namespace Core\Task;
 
-use Exception;
+use Core\Message\Messenger;
 
 class TaskManager
 {      
@@ -58,7 +58,7 @@ class TaskManager
          */
         if(!method_exists($this, $task)) {
 
-            throw new Exception("This method does not exist or aren't registrated to the TaskManager.");
+            new Messenger("This method does not exist or aren't registrated to the TaskManager.");
 
         }
 
@@ -89,7 +89,7 @@ class TaskManager
         if(!isset($message) || empty($message)) {
         
 
-            throw new Exception("The '\$message' parameter aren't defined.");
+            new Messenger("The '\$message' parameter aren't defined.");
 
         }
 

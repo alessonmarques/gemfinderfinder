@@ -8,10 +8,9 @@ if(isset($options) && !empty($options)) {
     /**
      * Decodes the received json to an array.
      */
-    $options = json_decode($options, TRUE);
+    $_SESSION['options'] = $options = json_decode($options, TRUE);
 
     if(json_last_error() === JSON_ERROR_NONE && is_array($options)) {
-    
 
         extract($options);
 
@@ -20,7 +19,7 @@ if(isset($options) && !empty($options)) {
 }
 
 /**
- * Define the header to return data in JSOn.
+ * Define the header to return data in json.
  */
 if($mode == 'json') {
     header("Access-Control-Allow-Origin: *");

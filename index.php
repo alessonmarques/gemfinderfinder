@@ -1,5 +1,12 @@
 <?php 
     /**
+     * Starts the Session to share global variables.
+     * Reinitializate the $_SESSION variables.
+     */
+    session_start();
+    $_SESSION = [];
+
+    /**
      * Routing script get the pre-defined parameters to check if 
      * everthing is ok and redirect to the route.
      */
