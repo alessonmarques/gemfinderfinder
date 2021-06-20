@@ -74,7 +74,7 @@ class StartCommand extends Command {
 
                 if ($wallet_already_registrated) {
                     $this->replyWithMessage([
-                        'text' => "That wallet already is registrated."
+                        'text' => "This wallet is already registrated."
                     ]);
                 }
                 else 

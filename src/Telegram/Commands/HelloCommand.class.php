@@ -13,16 +13,6 @@ class HelloCommand extends Command {
         $update = $this->getUpdate();
     	$userid = $update->getMessage()->from->id;
 
-        //$arguments = $this->getArguments();
-
-        // $this->replyWithMessage([
-        //     'text' => json_encode($arguments)
-        // ]);
-        
-        // $this->replyWithMessage([
-        //     'text' => json_encode($update)
-        // ]);
-
         $this->replyWithMessage([
             'text' => "Hello World {$userid}"
         ]);
