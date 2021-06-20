@@ -1,6 +1,3 @@
-USE gff;
-
-
 
 DROP TABLE IF EXISTS log;
 DROP TABLE IF EXISTS tx_normal;
@@ -189,6 +186,6 @@ END$$
 delimiter $$
 
 
- INSERT INTO `gff`.`probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x905ad6d19e4249e771d9df7668ffc71cb1ad4a31', '1', '1', now(), now());
- INSERT INTO `gff`.`tx_normal` (`transaction_hash`, `_from`, `_to`, `price`, `quantity`, `date`) VALUES ('0x626f65cd420760299741102990e5f48dafe675843ef9886874402656aeaa1a94', 1, '0x579f11c75eb4e47f5290122e87ca411644adcd97', '2030.03', '250000000000', '2021-06-19 06:27:21');
- INSERT INTO `gff`.`tx_internal` (`transaction_hash`, `_from`, `_to`, `price`, `quantity`, `date`) VALUES ('0xe263ef9507ac85d41f9334c8e0a38a691d2afe7625a2ab92818f46a4420f1c16', '0x579f11c75eb4e47f5290122e87ca411644adcd97', 1, '1250.03', '250000000000', '2021-06-19 06:27:21');
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x905ad6d19e4249e771d9df7668ffc71cb1ad4a31', '1', '1', now(), now());
+ INSERT INTO `tx_normal` (`transaction_hash`, `_from`, `_to`, `price`, `quantity`, `date`) VALUES ('0x626f65cd420760299741102990e5f48dafe675843ef9886874402656aeaa1a94', 1, '0x579f11c75eb4e47f5290122e87ca411644adcd97', '2030.03', '250000000000', '2021-06-19 06:27:21');
+ INSERT INTO `tx_internal` (`transaction_hash`, `_from`, `_to`, `price`, `quantity`, `date`) VALUES ('0xe263ef9507ac85d41f9334c8e0a38a691d2afe7625a2ab92818f46a4420f1c16', '0x579f11c75eb4e47f5290122e87ca411644adcd97', 1, '1250.03', '250000000000', '2021-06-19 06:27:21');

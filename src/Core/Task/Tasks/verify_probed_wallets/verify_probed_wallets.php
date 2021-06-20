@@ -30,7 +30,7 @@ $report = new stdClass();
  * Run the loop with the probed_wallets.
  */
 foreach ($probed_wallets as $probed_wallet) {
-
+	$run_start_date = date("Y-m-d h:i:s");
     /**
      * Get the last TX registrated to that wallet in the BD.
      */
@@ -85,25 +85,30 @@ foreach ($probed_wallets as $probed_wallet) {
     }
     
     if($report->messages) {
-    
         /**
          * Sort the message array by key to mix the in and out ordened by TimeStamp.
          */
         ksort($report->messages);
-
-        /**
-         * Join the whole array into a String to send as report to telegram chat_id.
-         */
-        $report_message = implode("\n", $report->messages);
         
-        /**
-         * Send the report to telegram.
-         */
-        $telegram->sendMessage([
-            'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
-            'text' => $report_message
-        ]);
+        foreach ($report->messages as $TXmessage) {
+            /**
+             * Join the whole array into a String to send as report to telegram chat_id.
+             */
+            /* $report_message = implode("\n", $report->messages); */ //In check..
+            
+            /**
+             * Send the report to telegram.
+             */
+            $telegram->sendMessage([
+                'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
+                'text' => $TXmessage
+            ]);
+        }
     }
+
+    $run_end_date = date("Y-m-d h:i:s");
+
+    echo "probed {$probed_wallet->address} verified at: {$run_start_date} ~ {$run_end_date} \n";
     
 }
 
