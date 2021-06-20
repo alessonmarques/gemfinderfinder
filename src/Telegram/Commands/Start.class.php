@@ -2,11 +2,13 @@
 
 namespace Telegram\Commands;
 
+use Core\PDO\Connection;
 use Telegram\Bot\Commands\Command;
 
-class HelloCommand extends Command {
 
-    protected $name = 'hello';
+class StartCommand extends Command {
+
+    protected $name = 'start';
 
     public function handle() {
     
@@ -15,17 +17,17 @@ class HelloCommand extends Command {
 
         $arguments = $update->getArguments();
 
+
+        /**
+         * Define the connection with DB.
+         */
+        $connection = new Connection();
+
+
         $this->replyWithMessage([
             'text' => json_encode($arguments)
         ]);
 
-        // $this->replyWithMessage([
-        //     'text' => "Hello World {$userid}"
-        // ]);
-
-        // $this->replyWithMessage([
-        //     'text' => json_encode($update)
-        // ]);
     }
 
 }
