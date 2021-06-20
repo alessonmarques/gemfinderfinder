@@ -1,19 +1,14 @@
 <?php 
-    // Just to test moment.
-    if (!$_GET['wallet'])
-    {
-        require __DIR__ . "/HebernMachine.php";
-        die();
-    }
+    /**
+     * Routing script get the pre-defined parameters to check if 
+     * everthing is ok and redirect to the route.
+     */
+    require __DIR__ . "/routing.php";
 
-    $debug = $_GET['debug'];
-
-    if(!$debug)
-    {
-        header("Access-Control-Allow-Origin: *");
-        header('Content-Type: application/json; charset=utf-8');
-        header("Cache-Control: no-cache, no-store, must-revalidate");
-    }
+    /**
+     * Options set how the info will be returned to the screen.
+     */
+    require __DIR__ . "/options.php";
     
     /**
      * Start the autoloader to bring all classes to the system.

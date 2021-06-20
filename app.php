@@ -2,8 +2,13 @@
 
 use Core\Task\TaskManager;
 
+/**
+ * Instantiate the TaskManager to dinamically call the tasks.
+ */
 $task_manager = new TaskManager();
-//$task_manager->verify_probed_wallets();
 
-$message = $_GET['message'];
-$task_manager->send_custom_message_to_group($message);
+/**
+ * $task = Parameter on $_GET['task'];
+ * $parameters = Parameter on $_GET['parameters'];
+ */
+$task_manager->$task($parameters);
