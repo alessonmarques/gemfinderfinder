@@ -5,12 +5,16 @@
 
 namespace Telegram;
 
-use Telegram\Commands\HelloCommand;
 use Telegram\Bot\Api;
+
+use Telegram\Commands\HelloCommand;
+use Telegram\Commands\StartCommand;
+
 class Telegram extends Api
 {
     private $commands = [
         HelloCommand::class,
+        StartCommand::class,
     ];
 
     /**
