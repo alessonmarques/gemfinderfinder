@@ -4,7 +4,8 @@
     * Defines the log to get access data.
     */
     $SERVER_REQUEST_DATA = json_encode(['Server' => $_SERVER, 'Post' => $_POST, 'Get' => $_GET, 'Request' => $_REQUEST]);
-    
+    error_log($SERVER_REQUEST_DATA . PHP_EOL);
+        
     /**
     * Start the autoloader to bring all classes to the system.
     */
@@ -14,5 +15,3 @@
     
     $telegram = new Telegram();
     $telegram->commandsHandler(true);
-
-    error_log(json_encode($telegram));

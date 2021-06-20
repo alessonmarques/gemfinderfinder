@@ -4,16 +4,27 @@
 
     use Codenixsv\CoinGeckoApi\CoinGeckoClient;
     use Core\Account;
+    use Core\PDO\Connection;
     use Telegram\Telegram;
+    
+    $wallet     = $_GET['wallet'];
+    $account    = new Account($wallet);
 
+    $connection = new Connection();
+
+    $sql = "SELECT * FROM probed_wallet WHERE status = 1 AND is_gemfinder = 1";
+    $result = $connection->select($sql);
+
+    /*
     if(isset($_GET['wallet']) && !empty($_GET['wallet']))
     {
     
         $wallet     = $_GET['wallet'];
         $account    = new Account($wallet);
-
+        
+        
         $gecko = new CoinGeckoClient();
-        //$data = $gecko->ping();
+        $data = $gecko->ping();
 
         $telegram = new Telegram();
         $telegram->sendMessage([
@@ -29,7 +40,9 @@
                 'text' => 'Successfully set up webhook'
             ]);
         }
+       
                
-        //print_r($account->getNormalTXList());
+        //print_r($account->getNormalTXList()->result);
         die();
     }
+     */
