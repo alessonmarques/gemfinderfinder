@@ -33,9 +33,13 @@ class Connection
         $rs = null;
         $stmt = null;
         try{
+
             $stmt = $this->pdo->query("{$sql}");
+
         } catch(PDOException $e) {
-            return $e;
+
+            print_r($e);
+
         }
     }
     
@@ -44,11 +48,15 @@ class Connection
         $rs = null;
         $stmt = null;
         try{
+
             $stmt = $this->pdo->prepare("{$sql}");
             $stmt->execute();
             $rs = $stmt->fetchAll(PDO::FETCH_OBJ);
+
         } catch(PDOException $e) {
+
             print_r($e);
+
         }
         return $rs;
     }
@@ -63,11 +71,14 @@ class Connection
                                 PDO::MYSQL_ATTR_INIT_COMMAND => "SET NAMES utf8mb4",
                                 //PDO::ATTR_TIMEOUT => "999",
                                 //PDO::ATTR_PERSISTENT => true,
+                                //PDO::MYSQL_ATTR_MAX_BUFFER_SIZE => 1024*1024*50,
                                 PDO::ATTR_ERRMODE => PDO::ERRMODE_EXCEPTION
                             )
                         );
         } catch(PDOException $e) {
+
             return $e;
+
         }
 
         return $pdo;
