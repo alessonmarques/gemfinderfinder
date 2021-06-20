@@ -57,7 +57,7 @@ if($count_normalTXList != count($normalTXList)) {
             /**
              * Save the message to send as report.
              */
-            $report->messages["{$normalTX->timeStamp}.out"] = "The address {$normalTX->from} make a transaction to {$normalTX->to} at {$transaction_hash_date}. \nYou can check it in the TX: {$normalTX->hash}.";
+            $report->messages["{$normalTX->timeStamp}.out"] = "\n The address {$normalTX->from} make a transaction to {$normalTX->to} at {$transaction_hash_date}. \nYou can check it in the TX: {$normalTX->hash}.";
 
         }
         /**

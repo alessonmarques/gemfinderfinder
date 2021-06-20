@@ -11,7 +11,6 @@ if($count_internalTXList != count($internalTXList)) {
     $sql = "SELECT * FROM tx_internal WHERE _to = '{$probed_wallet->id}' ORDER BY timestamp DESC LIMIT 1";
     $last_internalTX = $connection->select($sql)[0];
 
-    echo $sql; 
     /**
      * Loop in the TX from BSC to persist the data in DB.
      */
@@ -58,7 +57,7 @@ if($count_internalTXList != count($internalTXList)) {
             /**
              * Save the message to send as report.
              */
-            $report->messages["{$internalTX->timeStamp}.in"] = "The address {$internalTX->from} received a transaction to {$internalTX->to} at {$transaction_hash_date}. {\n}You can check it in the TX: {$internalTX->hash}.";
+            $report->messages["{$internalTX->timeStamp}.in"] = "\n The address {$internalTX->from} received a transaction to {$internalTX->to} at {$transaction_hash_date}. \nYou can check it in the TX: {$internalTX->hash}.";
 
         }
         /**
