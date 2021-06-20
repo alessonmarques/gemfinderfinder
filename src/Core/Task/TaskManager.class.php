@@ -16,4 +16,11 @@ class TaskManager
         require 'Tasks/verify_probed_wallets/verify_probed_wallets.php';
     }
 
+    /**
+     * Defines the send_custom_message_to_group Function.
+     */
+    function send_custom_message_to_group($message) {
+        require 'Tasks/send_custom_message_to_group/send_custom_message_to_group.php';
+    }
+
 }
