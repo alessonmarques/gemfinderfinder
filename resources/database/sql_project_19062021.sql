@@ -1,18 +1,17 @@
 USE gff;
 
-/*
-	DROP TABLE IF EXISTS log;
-	DROP TABLE IF EXISTS tx_normal;
-	DROP TABLE IF EXISTS tx_internal;
-	DROP TABLE IF EXISTS wallet_token;
-	DROP TABLE IF EXISTS user_wallet;
-	DROP TABLE IF EXISTS probed_wallet;
-	DROP TABLE IF EXISTS token;
-	DROP TABLE IF EXISTS users;
-*/
+
+
+DROP TABLE IF EXISTS log;
+DROP TABLE IF EXISTS tx_normal;
+DROP TABLE IF EXISTS tx_internal;
+DROP TABLE IF EXISTS wallet_token;
+DROP TABLE IF EXISTS user_wallet;
+DROP TABLE IF EXISTS probed_wallet;
+DROP TABLE IF EXISTS token;
+DROP TABLE IF EXISTS users;
+
                 
-
-
 create table users(	id int primary key auto_increment, 
 
 					first_name varchar(50), 
@@ -22,6 +21,8 @@ create table users(	id int primary key auto_increment,
                     telegram_id varchar(200),
                     
                     status boolean,
+                    
+                    is_probed boolean,
                                         
                     created datetime,
                     updated datetime);
@@ -30,10 +31,12 @@ create table users(	id int primary key auto_increment,
 
 create table token(	id int primary key auto_increment,
 					
+                    contract varchar(100) not null,
+
                     name varchar(100) not null,
                     short_name varchar(100) not null,
                     
-                    contract varchar(100) not null,
+
                     current_price decimal(34,18),
                     first_price decimal(34,18),
                     last_price decimal(34,18),
@@ -76,9 +79,12 @@ create table wallet_token( 	id int primary key auto_increment,
 create table tx_normal (	id int primary key auto_increment,
 							
                             transaction_hash varchar(100) not null,
+
+                            timestamp TIMESTAMP null,
                             
                             _from int not null,
-                            _to int not null,
+                            --_to int not null,
+                            _to varchar(100) not null,
 							
                             price  decimal(34,18),
                             
@@ -86,15 +92,19 @@ create table tx_normal (	id int primary key auto_increment,
                             
                             date datetime,
 							
-                            foreign key (_from) references user_wallet(id),
-                            foreign key (_to) references token(id));
+                            foreign key (_from) references user_wallet(id)
+                            );
                             
 create table tx_internal (	id int primary key auto_increment,
 							
                             transaction_hash varchar(100) not null,
+
+                            timestamp TIMESTAMP null,
                             
-                            _from int not null,
+                            -- _from int not null,
+                            _form varchar(100) not null,
                             _to int not null,
+                            
 							
                             price  decimal(34,18),
                             
@@ -102,8 +112,8 @@ create table tx_internal (	id int primary key auto_increment,
                             
                             date datetime,
 
-                            foreign key (_from) references token(id),
-                            foreign key (_to) references user_wallet(id));
+                            foreign key (_to) references user_wallet(id)
+                            );
 
 create table log (	id int primary key auto_increment,
 					message text,
@@ -113,10 +123,14 @@ create table log (	id int primary key auto_increment,
 
 
 
-                
+/*
+'1', '0x905ad6d19e4249e771d9df7668ffc71cb1ad4a31', null, '1', '1', '2021-06-19 06:21:06', '2021-06-19 06:21:06'
+*/
 create table probed_wallet (	id int primary key auto_increment,
 								
                                 address varchar(100) not null,
+                                
+                                user int null,
                                 
                                 status boolean,
                                 
@@ -128,4 +142,5 @@ create table probed_wallet (	id int primary key auto_increment,
 							
 #-------------------------------------
 
-INSERT INTO `gff`.`probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x905ad6d19e4249e771d9df7668ffc71cb1ad4a31', '1', '1', now(), now());
+ INSERT INTO `gff`.`probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x905ad6d19e4249e771d9df7668ffc71cb1ad4a31', '1', '1', now(), now());
+ INSERT INTO `gff`.`tx_normal` (`transaction_hash`, `_from`, `_to`, `price`, `quantity`, `date`) VALUES ('0x626f65cd420760299741102990e5f48dafe675843ef9886874402656aeaa1a94', 1, '0x579f11c75eb4e47f5290122e87ca411644adcd97', '2030.03', '250000000000', '2021-06-19 06:27:21');
