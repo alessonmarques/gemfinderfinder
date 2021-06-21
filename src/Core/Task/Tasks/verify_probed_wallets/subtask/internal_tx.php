@@ -57,18 +57,18 @@ if($count_internalTXList != count($internalTXList)) {
             /**
              * Save the message to send as report.
              */
-            $normalTX->from_abreviation  = substr($normalTX->from, 0, 5) . "..." . substr($normalTX->from, 40, 6);
-            $normalTX->to_abreviation    = substr($normalTX->to, 0, 5) . "..." . substr($normalTX->to, 40, 6);
+            $normalTX->from_abreviation  = substr($normalTX->from, 0, 10) . "..." . substr($normalTX->from, 30, 6);
+            $normalTX->to_abreviation    = substr($normalTX->to, 0, 10) . "..." . substr($normalTX->to, 30, 6);
 
-            $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 5) . "..." . substr($normalTX->hash, 40, 15);
+            $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 10) . "..." . substr($normalTX->hash, 45, 15);
 
-            $report->messages["{$internalTX->timeStamp}.in"] = //"\n The address {$internalTX->from}  to {$internalTX->to} at {$transaction_hash_date}. \nYou can check it in the TX: {$internalTX->hash}.";
-                                                                //"<pre>".
-                                                                "\nThe address <b>{$normalTX->to_abreviation}</b> at <b>{$transaction_hash_date}</b>".
-                                                                "\nreceived a transaction from <b>{$normalTX->from_abreviation}</b>".
-                                                                "\n<a href=\"https://bscscan.com/tx/{$normalTX->hash}\">Click here to check it in the TX: {$normalTX->tx_abreviation}</a>".
-                                                                "";
-                                                                //"</pre>";
+            $report->messages["{$internalTX->timeStamp}.in"] = "\n\n\nThe address <b>{$normalTX->to_abreviation}</b> at <b>{$transaction_hash_date}</b>".
+
+                                                               "\n\n\nreceived a transaction from <b>{$normalTX->from_abreviation}</b>".
+
+                                                               "\n\n\n<a href=\"https://bscscan.com/tx/{$normalTX->to}\">Click here to check it in the TX: {$normalTX->tx_abreviation}</a>".
+
+                                                               "";
         }
         /**
          * Implode the values to insert all rows in same exectuion.
