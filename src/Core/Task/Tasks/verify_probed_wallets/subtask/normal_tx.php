@@ -62,15 +62,13 @@ if($count_normalTXList != count($normalTXList)) {
 
             $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 5) . "..." . substr($normalTX->hash, 40, 15);
 
-            $report->messages["{$normalTX->timeStamp}.out"] =   "\n\n\nThe address <b>{$normalTX->from_abreviation}</b>".
+            $report->messages["{$normalTX->timeStamp}.out"] =   "\nThe address <b>{$normalTX->from_abreviation}</b>".
 
-                                                                "\n\n\nmake a transaction to <b>{$normalTX->to_abreviation}</b> at <b>{$transaction_hash_date}</b>".
+                                                                "\nmake a transaction to <b>{$normalTX->to_abreviation}</b> at <b>{$transaction_hash_date}</b>".
 
                                                                 "\n\n\n<a href=\"https://bscscan.com/tx/{$normalTX->hash}\">BSC Scan: {$normalTX->tx_abreviation}</a>".
 
                                                                 "\n\n\n<a href=\"https://charts.bogged.finance/?token={$normalTX->to}\"> Bogged Finance : Chart </a>".
-
-                                                                "\n\n\n<a href=\"https://charts.bogged.finance/?token={$normalTX->to}\"> Poo Coin : Chart </a>".
                                                                 
                                                                 "\n\n\n<a href=\"https://v1exchange.pancakeswap.finance/#/swap?outputCurrency={$normalTX->to}\"> Pancake Swap : V1 - 🍰 </a>".
 

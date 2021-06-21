@@ -62,9 +62,9 @@ if($count_internalTXList != count($internalTXList)) {
 
             $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 10) . "..." . substr($normalTX->hash, 45, 15);
 
-            $report->messages["{$internalTX->timeStamp}.in"] = "\n\n\nThe address <b>{$normalTX->to_abreviation}</b> at <b>{$transaction_hash_date}</b>".
+            $report->messages["{$internalTX->timeStamp}.in"] = "\nThe address <b>{$normalTX->to_abreviation}</b> at <b>{$transaction_hash_date}</b>".
 
-                                                               "\n\n\nreceived a transaction from <b>{$normalTX->from_abreviation}</b>".
+                                                               "\nreceived a transaction from <b>{$normalTX->from_abreviation}</b>".
 
                                                                "\n\n\n<a href=\"https://bscscan.com/tx/{$normalTX->to}\">Click here to check it in the TX: {$normalTX->tx_abreviation}</a>".
 
