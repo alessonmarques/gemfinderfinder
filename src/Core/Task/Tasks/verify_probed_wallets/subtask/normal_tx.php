@@ -57,7 +57,17 @@ if($count_normalTXList != count($normalTXList)) {
             /**
              * Save the message to send as report.
              */
-            $report->messages["{$normalTX->timeStamp}.out"] = "\n The address {$normalTX->from} make a transaction to {$normalTX->to} at {$transaction_hash_date}. \nYou can check it in the TX: {$normalTX->hash}.";
+            $normalTX->from_abreviation  = substr($normalTX->from, 0, 5) . "..." . substr($normalTX->from, 40, 6);
+            $normalTX->to_abreviation    = substr($normalTX->to, 0, 5) . "..." . substr($normalTX->to, 40, 6);
+
+            $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 5) . "..." . substr($normalTX->hash, 40, 15);
+
+            $report->messages["{$normalTX->timeStamp}.out"] =   "´´´".
+                                                                "\nThe address *{$normalTX->from_abreviation}*".
+                                                                "\nmake a transaction to *{$normalTX->to_abreviation}* at *{$transaction_hash_date}*.".
+                                                                "\n[Click here to check it in the TX: {$normalTX->tx_abreviation}](https://bscscan.com/tx/{$normalTX->hash}).".
+                                                                "\n[Click here to open it on Pancake Swap 🍰](https://bscscan.com/tx/{$normalTX->hash}).".
+                                                                "´´´";
 
         }
         /**

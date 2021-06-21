@@ -101,7 +101,8 @@ foreach ($probed_wallets as $probed_wallet) {
              */
             $telegram->sendMessage([
                 'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
-                'text' => $TXmessage
+                'text' => $TXmessage,
+                'parse_mode' => 'MarkdownV2'
             ]);
         }
     }
