@@ -63,12 +63,11 @@ if($count_internalTXList != count($internalTXList)) {
             $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 5) . "..." . substr($normalTX->hash, 40, 15);
 
             $report->messages["{$internalTX->timeStamp}.in"] = //"\n The address {$internalTX->from}  to {$internalTX->to} at {$transaction_hash_date}. \nYou can check it in the TX: {$internalTX->hash}.";
-                                                                "´´´".
-                                                                "\nThe address *{$normalTX->to_abreviation}* at *{$transaction_hash_date}*.".
-                                                                "\nreceived a transaction from *{$normalTX->from_abreviation}*".
-                                                                "\n[Click here to check it in the TX: {$normalTX->tx_abreviation}](https://bscscan.com/tx/{$normalTX->hash}).".
-                                                                //"\n[Click here to open it on Pancake Swap 🍰](https://bscscan.com/tx/{$normalTX->hash}).".
-                                                                "´´´";
+                                                                "<pre>".
+                                                                "\nThe address <b>{$normalTX->to_abreviation}</b> at <b>{$transaction_hash_date}</b>".
+                                                                "\nreceived a transaction from <b>{$normalTX->from_abreviation}</b>".
+                                                                "\n<a href=\"https://bscscan.com/tx/{$normalTX->hash}\">Click here to check it in the TX: {$normalTX->tx_abreviation}</a>".
+                                                                "</pre>";
         }
         /**
          * Implode the values to insert all rows in same exectuion.
