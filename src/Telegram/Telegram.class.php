@@ -26,6 +26,7 @@ class Telegram extends Api
     function __construct() {
     
         parent::__construct($_ENV['APP_TELEGRAM_BOT_TOKEN']);
+        $this->loadGroupsChatID();
         $this->addCommands($this->commands);
     }
 
