@@ -8,7 +8,8 @@ class Token extends CoreObject
     /**
      * Define the BSC Module parameter.
      */
-    const OBJECT_MODULE = 'token';
+    const OBJECT_SERVICE    = 'api';
+    const OBJECT_MODULE     = 'token';
 
     protected $id;
     
@@ -21,29 +22,5 @@ class Token extends CoreObject
             $this->setId($id);
         }
     }
-    
-    /*
-    function getTXList($custom_parameters = [   
-                                            'startblock' => NULL, 
-                                            'endblock' => NULL, 
-                                            'sort' => 'desc'
-                                        ]) {
-    
-        $action = 'txlist';
-        $parameters = [ 
-            'address' => $this->id
-        ];
-        
-        $this->getCustomParameters($parameters, $custom_parameters);    
 
-        $request = new ApiUrn(
-                                $this::OBJECT_SERVICE, 
-                                $this::OBJECT_MODULE, 
-                                $action, 
-                                $parameters);
-
-        $txList = $this->communicate('', 'GET', $request);
-        return $txList;
-    }
-    */
 }

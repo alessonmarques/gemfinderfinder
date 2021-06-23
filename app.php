@@ -12,3 +12,5 @@ $task_manager = new TaskManager();
  * $parameters = Parameter on $_GET['parameters'];
  */
 $task_manager->$task($parameters);
+
+//$cmc = new CoinMarketCap\Api('yourApiClient');

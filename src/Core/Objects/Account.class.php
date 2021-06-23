@@ -10,7 +10,8 @@ class Account extends CoreObject
     /**
      * Define the BSC Module parameter.
      */
-    const OBJECT_MODULE = 'account';
+    const OBJECT_SERVICE    = 'api';
+    const OBJECT_MODULE     = 'account';
 
     protected $id;
     

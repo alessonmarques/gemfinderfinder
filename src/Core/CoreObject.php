@@ -6,7 +6,6 @@ use Api\ApiUrn;
 
 class CoreObject extends Core
 {
-    const OBJECT_SERVICE = 'api';
 
     public $tokenDestroyTime;
 

@@ -9,7 +9,8 @@
     ],
     "require": {
         "codenix-sv/coingecko-api": "^1.0",
-        "irazasyed/telegram-bot-sdk": "^3.4"
+        "irazasyed/telegram-bot-sdk": "^3.4",
+        "vittominacori/coinmarketcap-php": "^1.1"
     },
     "autoload": {
         "psr-4": {
