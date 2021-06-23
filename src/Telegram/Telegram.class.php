@@ -33,7 +33,7 @@ class Telegram extends Api
     function loadGroupsChatID() {
         
         foreach ($_ENV as $key => $value) {
-            if (substr($key, 0, strlen($this->chat_var_name)) == $this->chat_var_name) {
+            if (substr($key, 0, strlen($this->chat_groups_var_name)) == $this->chat_groups_var_name) {
                 $this->chat_groups[] = $value;
             }
         }

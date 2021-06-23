@@ -99,8 +99,8 @@ foreach ($probed_wallets as $probed_wallet) {
             /**
              * Send the report to telegram.
              */
-            $telegram->sendMessage([
-                'chat_id' => $_ENV['APP_TELEGRAM_BOT_CHAT_ID'],
+            $telegram->sendMessageToAllGroups([
+                'chat_id' => '',
                 'text' => $TXmessage,
                 'parse_mode' => 'HTML'
             ]);
