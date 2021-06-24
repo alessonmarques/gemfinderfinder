@@ -1,4 +1,10 @@
 <?php
+/**
+ * Define the variables that could be exported by 
+ * the extract in the block below.
+ */
+$mode 	= '';
+$debug 	= '';
 
 /**
  * Extract every variable in $_GET['options'];

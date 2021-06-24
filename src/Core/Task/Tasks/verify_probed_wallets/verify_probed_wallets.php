@@ -22,15 +22,20 @@ $sql = "SELECT * FROM probed_wallet WHERE status = 1 AND is_gemfinder = 1";
 $probed_wallets = $connection->select($sql);
 
 /**
- * Define the report as a default class to store anything as report.
- */
-$report = new stdClass();
-
-/**
  * Run the loop with the probed_wallets.
  */
 foreach ($probed_wallets as $probed_wallet) {
+
+    /**
+     * Set the date that the wallet scan started.
+     */
 	$run_start_date = date("Y-m-d h:i:s");
+
+    /**
+     * Define/Reset the report variable as a Default Class to store anything as report.
+     */
+    $report = new stdClass();
+
     /**
      * Get the last TX registrated to that wallet in the BD.
      */
@@ -62,6 +67,18 @@ foreach ($probed_wallets as $probed_wallet) {
         $count_internalTXList = $connection->select($sql)[0]->counter;
 
         /**
+         * Calcs the total TX Count
+         * just to know if is a new probed wallet.
+         */
+        $count_totalTXList = $count_normalTXList + $count_internalTXList;
+
+        /**
+         * If to sum of the TXs got equal 0, so is a new probed wallet.
+         */
+        $isANewProbedWallet = $count_totalTXList == 0 ? TRUE : FALSE;
+
+
+        /**
          * Invoke the Account with the Address of the selected wallet.
          */
         $account = new Account($probed_wallet->address);
@@ -84,18 +101,15 @@ foreach ($probed_wallets as $probed_wallet) {
 
     }
     
-    if($report->messages) {
+    if($report->messages && !$isANewProbedWallet) {
+
         /**
          * Sort the message array by key to mix the in and out ordened by TimeStamp.
          */
         ksort($report->messages);
         
         foreach ($report->messages as $TXmessage) {
-            /**
-             * Join the whole array into a String to send as report to telegram chat_id.
-             */
-            /* $report_message = implode("\n", $report->messages); */ //In check..
-            
+
             /**
              * Send the report to telegram.
              */
@@ -104,12 +118,14 @@ foreach ($probed_wallets as $probed_wallet) {
                 'text' => $TXmessage,
                 'parse_mode' => 'HTML'
             ]);
+
         }
+
     }
 
     $run_end_date = date("Y-m-d h:i:s");
 
-    echo "probed {$probed_wallet->address} verified at: {$run_start_date} ~ {$run_end_date} \n";
+    echo "LOG: Probed {$probed_wallet->address} verified at: {$run_start_date} ~ {$run_end_date} \n";
     
 }
 
