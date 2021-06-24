@@ -17,7 +17,7 @@ class Connection
                                         $port, 
                                         $dbname, 
                                         $drive);
-            exit();
+            return $this->getDb();
         }
         
         $this->pdo = $this->pdo(    $_ENV['APP_PDO_USR'], 
@@ -26,12 +26,26 @@ class Connection
                                     $_ENV['APP_PDO_PORT'], 
                                     $_ENV['APP_PDO_DB'], 
                                     $_ENV['APP_PDO_DRIVE']);
+            
+        return $this->getDb();
     }
+
+    private function getDb() {
+
+            if ($this->pdo instanceof PDO) {
+
+                return $this->pdo;
+
+            }
+
+    }
+ 
 
     public function execute($sql) {
     	
         $rs = null;
         $stmt = null;
+
         try{
 
             $stmt = $this->pdo->query("{$sql}");
