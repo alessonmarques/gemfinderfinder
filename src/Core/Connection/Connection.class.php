@@ -9,37 +9,33 @@ class Connection
     protected $pdo;
     
     public function __construct($usr = '', $pass = '', $host = '', $port = '', $dbname = '', $drive = '') {
-    
-        if(func_num_args()) {
-            $this->pdo = $this->pdo(    $usr, 
-                                        $pass, 
-                                        $host, 
-                                        $port, 
-                                        $dbname, 
-                                        $drive);
-            return $this->getDb();
+
+        try {
+        
+            if(func_num_args()) {
+                $this->pdo = $this->pdo(    $usr, 
+                                            $pass, 
+                                            $host, 
+                                            $port, 
+                                            $dbname, 
+                                            $drive);
+                exit();
+            }
+            
+            $this->pdo = $this->pdo(    $_ENV['APP_PDO_USR'], 
+                                        $_ENV['APP_PDO_PWD'], 
+                                        $_ENV['APP_PDO_HOST'], 
+                                        $_ENV['APP_PDO_PORT'], 
+                                        $_ENV['APP_PDO_DB'], 
+                                        $_ENV['APP_PDO_DRIVE']);
+
+        } catch(PDOException $e) {
+
+            print_r($e);
+
         }
         
-        $this->pdo = $this->pdo(    $_ENV['APP_PDO_USR'], 
-                                    $_ENV['APP_PDO_PWD'], 
-                                    $_ENV['APP_PDO_HOST'], 
-                                    $_ENV['APP_PDO_PORT'], 
-                                    $_ENV['APP_PDO_DB'], 
-                                    $_ENV['APP_PDO_DRIVE']);
-            
-        return $this->getDb();
     }
-
-    private function getDb() {
-
-            if ($this->pdo instanceof PDO) {
-
-                return $this->pdo;
-
-            }
-
-    }
- 
 
     public function execute($sql) {
     	
