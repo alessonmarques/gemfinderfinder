@@ -35,6 +35,7 @@ foreach ($probed_wallets as $probed_wallet) {
      * Define/Reset the report variable as a Default Class to store anything as report.
      */
     $report = new stdClass();
+    $report->messages = [];
 
     /**
      * Get the last TX registrated to that wallet in the BD.
@@ -60,10 +61,10 @@ foreach ($probed_wallets as $probed_wallet) {
         $count_normalTXList = 0;
         $count_internalTXList = 0;
 
-        $sql = "SELECT count(1) counter FROM tx_normal WHERE _from = '{$probed_wallet->address}'";
+        $sql = "SELECT count(1) counter FROM tx_normal WHERE _from = '{$probed_wallet->id}'";
         $count_normalTXList = $connection->select($sql)[0]->counter;
 
-        $sql = "SELECT count(1) counter FROM tx_internal WHERE _to = '{$probed_wallet->address}'";
+        $sql = "SELECT count(1) counter FROM tx_internal WHERE _to = '{$probed_wallet->id}'";
         $count_internalTXList = $connection->select($sql)[0]->counter;
 
         /**
@@ -86,8 +87,8 @@ foreach ($probed_wallets as $probed_wallet) {
         /**
          * Get the TXs from the BSC Scan.
          */
-        $normalTXList = $account->getNormalTXList()->result;
-        $internalTXList = $account->getInternalTXList()->result;
+        $normalTXList = $account->getNormalTXList()->result ? $account->getNormalTXList()->result : [];
+        $internalTXList = $account->getInternalTXList()->result ? $account->getInternalTXList()->result : [];
 
         /**
          * Call the Sub-Task to check and insert the Normal TX;

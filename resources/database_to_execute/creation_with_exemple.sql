@@ -185,6 +185,13 @@ END$$
 
 
  INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x905ad6d19e4249e771d9df7668ffc71cb1ad4a31', '1', '1', now(), now());
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0xe05797c279541ff102100445123fcf45958deb68', '1', '1', now(), now());
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x662339ddef1b80385cc1e709a4b9772518f65d0d', '1', '1', now(), now());
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x5390d4663aa36ca54c07a55065ba54d5fc1a4c25', '1', '1', now(), now());
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x816c8d6a41915ac50d78b881c93f40714aeae1de', '1', '1', now(), now());
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0x3f1a405c7b7ad771414a03393de12454ddb0a765', '1', '1', now(), now());
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0xca4d99a875f1021b318e7d22f540015923059178', '1', '1', now(), now());
+ INSERT INTO `probed_wallet` (`address`, `status`, `is_gemfinder`, `created`, `updated`) VALUES ('0xf8fc63200e181439823251020d691312fdcf5090', '1', '1', now(), now());
  
  /*
  INSERT INTO `tx_normal` (`transaction_hash`, `_from`, `_to`, `price`, `quantity`, `date`) VALUES ('0x626f65cd420760299741102990e5f48dafe675843ef9886874402656aeaa1a94', 1, '0x579f11c75eb4e47f5290122e87ca411644adcd97', '2030.03', '250000000000', '2021-06-19 06:27:21');
