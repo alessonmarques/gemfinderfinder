@@ -117,7 +117,8 @@ foreach ($probed_wallets as $probed_wallet) {
             $telegram->sendMessageToAllGroups([
                 'chat_id' => '',
                 'text' => $TXmessage,
-                'parse_mode' => 'HTML'
+                'parse_mode' => 'HTML',
+                'disable_web_page_preview' => TRUE
             ]);
 
         }

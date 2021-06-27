@@ -3,7 +3,7 @@
      * Starts the Session to share global variables.
      * Reinitializate the $_SESSION variables.
      */
-    session_start();
+    @session_start();
     $_SESSION = [];
 
     /**
