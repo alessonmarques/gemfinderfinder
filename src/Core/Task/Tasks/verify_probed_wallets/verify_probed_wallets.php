@@ -47,7 +47,7 @@ foreach ($probed_wallets as $probed_wallet) {
         /**
          * Define the user variable to hold the user
          */
-        $sql = "SELECT * FROM user WHERE user = '{$probed_wallet->user}'";
+        $sql = "SELECT * FROM users WHERE id = '{$probed_wallet->user}'";
         $user = $connection->select($sql)[0];
 
         /**

@@ -57,16 +57,15 @@ if($count_internalTXList != count($internalTXList)) {
             /**
              * Save the message to send as report.
              */
-            $normalTX->from_abreviation  = substr($normalTX->from, 0, 10) . "..." . substr($normalTX->from, 30, 6);
-            $normalTX->to_abreviation    = substr($normalTX->to, 0, 10) . "..." . substr($normalTX->to, 30, 6);
+            $internalTX->from_abreviation  = substr($internalTX->from, 0, 10) . "..." . substr($internalTX->from, 30, 6);
+            $internalTX->to_abreviation    = substr($internalTX->to, 0, 10) . "..." . substr($internalTX->to, 30, 6);
 
-            $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 10) . "..." . substr($normalTX->hash, 45, 15);
+            $internalTX->tx_abreviation    = substr($internalTX->hash, 0, 10) . "..." . substr($internalTX->hash, 45, 15);
 
             $report->messages["{$internalTX->timeStamp}.in"] = "\nThe <b>{$user->first_name} {$user->last_name}</b> at <b>[ {$transaction_hash_date} ]</b>".
+                                                               "\nreceived a transaction from <b>{$internalTX->from_abreviation}</b>".
 
-                                                               "\nreceived a transaction from <b>{$normalTX->from_abreviation}</b>".
-
-                                                               "\n\n<a href=\"https://bscscan.com/tx/{$normalTX->hash}\">Click here to check it in the TX: {$normalTX->tx_abreviation}</a>".
+                                                               "\n\n<a href=\"https://bscscan.com/tx/{$internalTX->hash}\">Click here to check it in the TX: {$normalTX->tx_abreviation}</a>".
 
                                                                "";
         }

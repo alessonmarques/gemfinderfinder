@@ -63,7 +63,6 @@ if($count_normalTXList != count($normalTXList)) {
             $normalTX->tx_abreviation    = substr($normalTX->hash, 0, 5) . "..." . substr($normalTX->hash, 50, 5);
 
             $report->messages["{$normalTX->timeStamp}.out"] =   "\nThe <b>{$user->first_name} {$user->last_name}</b> at <b>[ {$transaction_hash_date} ]</b>".
-
                                                                 "\nmake a transaction to <b>{$normalTX->to_abreviation}</b>".
 
                                                                 "\n\n<a href=\"https://bscscan.com/tx/{$normalTX->hash}\">BSC Scan: {$normalTX->tx_abreviation}</a>".
