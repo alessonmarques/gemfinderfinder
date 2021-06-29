@@ -65,7 +65,7 @@ if($count_internalTXList != count($internalTXList)) {
             $report->messages["{$internalTX->timeStamp}.in"] = "\nThe <b>{$user->first_name} {$user->last_name}</b> at <b>[ {$transaction_hash_date} ]</b>".
                                                                "\nreceived a transaction from <b>{$internalTX->from_abreviation}</b>".
 
-                                                               "\n\n<a href=\"https://bscscan.com/tx/{$internalTX->hash}\">Click here to check it in the TX: {$internalTX->tx_abreviation}</a>".
+                                                               "\n\n<a href=\"https://bscscan.com/tx/{$internalTX->hash}\">Click here to check it in the TX: {$internalTX->tx_abreviation} - 🔍 </a>".
 
                                                                "";
         }

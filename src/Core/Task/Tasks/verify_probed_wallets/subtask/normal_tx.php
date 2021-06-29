@@ -65,10 +65,10 @@ if($count_normalTXList != count($normalTXList)) {
             $report->messages["{$normalTX->timeStamp}.out"] =   "\nThe <b>{$user->first_name} {$user->last_name}</b> at <b>[ {$transaction_hash_date} ]</b>".
                                                                 "\nmake a transaction to <b>{$normalTX->to_abreviation}</b>".
 
-                                                                "\n\n<a href=\"https://bscscan.com/tx/{$normalTX->hash}\">BSC Scan: {$normalTX->tx_abreviation}</a>".
-                                                                "\n\n<a href=\"https://charts.bogged.finance/?token={$normalTX->to}\"> Bogged Finance : Chart </a>".
-                                                                "\n\n<a href=\"https://v1exchange.pancakeswap.finance/#/swap?outputCurrency={$normalTX->to}\"> Pancake Swap : V1 - 🍰 </a>".
-                                                                "\n\n<a href=\"https://exchange.pancakeswap.finance/#/swap?outputCurrency={$normalTX->to}\"> Pancake Swap : V2 - 🍰 </a>".
+                                                                "\n\n<a href=\"https://bscscan.com/tx/{$normalTX->hash}\">BSC Scan: {$normalTX->tx_abreviation} - 🔍 </a>".
+                                                                "\n\n<a href=\"https://charts.bogged.finance/?token={$normalTX->to}\"> Bogged Finance : Chart - 📈 </a>".
+                                                                "\n\n<a href=\"https://v1exchange.pancakeswap.finance/#/swap?outputCurrency={$normalTX->to}\"> Pancake Swap : V1 - 🥞 </a>".
+                                                                "\n\n<a href=\"https://exchange.pancakeswap.finance/#/swap?outputCurrency={$normalTX->to}\"> Pancake Swap : V2 - 🥞 </a>".
 
                                                                 "";
         }
